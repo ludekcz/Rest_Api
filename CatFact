@@ -1,11 +1,14 @@
 package com.example.rest_api.API;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CatFact {
     String fact;
+    String reverse;
+    int UnitTest;
     int length;
 
 
@@ -16,9 +19,13 @@ public class CatFact {
         public String getFact() {
             return fact;
         }
-
         public void setFact(String fact) {
             this.fact = fact;
+            for(int i = fact.length() - 1; i >= 0; i--)
+            {
+                reverse = reverse + fact.charAt(i);
+            }
+
         }
 
         public int getLength() {
@@ -27,17 +34,28 @@ public class CatFact {
 
         public void setLength(int length) {
            this.length = length;
+
+            if (fact.length() == length) //Unit test kontrola délky parametru fact zda odpovídá parametru count
+            {
+                UnitTest = length;
+            }
+            else
+            {
+                UnitTest = 0;
+            }
         }
 
+
+
+    @GetMapping("/fakt")
     @Override
     public String toString() { //Výstup rest API faktů o kočkách s maximální délkou 100
         return "CatFact{" +
                 "fact='" + fact + '\'' +
+                "||| Obraceny fakt ||| = '" + reverse + '\'' +
+                "||| UNIT TEST? ||| = '" + UnitTest + '\'' +
                 ", length=" + length +
                 '}';
     }
-    @GetMapping("/fakty") // První kroky pouze zda funguje java + verze .jdks neslo mi to chvilku srovnat.
-    public String greetMessage(){
-        return "fact = " + this.fact;
-    }
+
 }
