@@ -19,7 +19,7 @@ public class CatFact {
         public String getFact() {
             return fact;
         }
-        public void setFact(String fact) {
+        public void setFact(String fact) { //obraceny text, kde se odebírá délka z fact.length začíná např na 82 a jede až na 0 a během toho zapisujeme pro každou iteraci písmeno do reverse.
             this.fact = fact;
             for(int i = fact.length() - 1; i >= 0; i--)
             {
@@ -47,7 +47,7 @@ public class CatFact {
 
 
 
-    @GetMapping("/fakt")
+    @GetMapping("/fakt") //localhost:8080/fakt
     @Override
     public String toString() { //Výstup rest API faktů o kočkách s maximální délkou 100
         return "CatFact{" +
